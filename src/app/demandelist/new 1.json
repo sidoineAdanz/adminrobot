@@ -1,0 +1,35 @@
+{
+
+"coursSupinfo" : {
+
+"Angular 4" : {
+
+"description" : "L'histoire d'Angular 4",
+
+"title" : "Angular 4",
+
+"url" : "https://supinfo.com/"
+
+},
+
+"Bootstrap 4" : {
+
+"description" : "L'histoire de Bootstrap 4",
+
+"title" : "Bootstrap 4",
+
+"url" : "https://supinfo.com/"
+
+},
+
+"Firebase" : {
+
+"description" : "L'histoire de Firebase",
+
+"title" : "Firebase",
+
+"url" : "https://supinfo.com/" }
+
+}
+
+} 
