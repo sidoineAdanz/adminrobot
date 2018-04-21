@@ -88,11 +88,11 @@ console.log ("val from DB",this.besoins);
   ngOnInit() {
 } 
 onSubmit(form: NgForm) { 
-    console.log(form.value);
+ //   console.log(form.value);
 	const itemsmsgtosend = this.af.list('/boteventinboxer/msgtosend');
 	if (this.type=="achatspecial") {
 	if (form.value.reponserobot=="") {
-		var reponsestandqrd="Pour ton achat: \n\n"+form.value.s+"\n\nil manque plus de détail. il me faut ce que tu veux acheter,ton contact et ta ville!\n\nPour toutes questions, contactez le +229 62502434.";
+		var reponsestandqrd="Pour ton achat: \n\n"+form.value.s+"\n\nil manque plus de détails. il me faut ce que tu veux acheter,ton contact et ta ville!\n\nPour toutes questions, contactez le +229 62502434.";
     this.addToListmsgtosend({user:form.value.user,msg:reponsestandqrd});
 	this.removeItemFromListbesoin(form.value.valkey);
 	} else if (form.value.reponserobot=="a") {
