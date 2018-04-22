@@ -16,7 +16,7 @@ Paper Dashboard Angular is a Bootstrap Admin Template which combines soft colors
 + [Live Preview](http://pd-angular.creative-tim.com/dashboard)
 + [Paper Dashboard PRO Angular](https://www.creative-tim.com/product/paper-dashboard-pro-angular)
 + [Paper Kit - For Front End Development](https://www.creative-tim.com/product/paper-kit?ref=github-pd-angular)
-
+100MAXSuccess
 
 ## Quick start
 

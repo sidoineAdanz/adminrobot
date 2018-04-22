@@ -82,7 +82,14 @@ if (this.type=="achatspecial") {this.date = ""; }
         limitToFirst: 100
 	}
       });	
-	} 
+	} else {
+		this.myVar=false;
+	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
+	query: {
+        limitToFirst: 100
+	}
+      });		
+	}
 console.log ("val from DB",this.besoins);
   }
   ngOnInit() {
@@ -112,7 +119,7 @@ this.removeItemFromListbesoin(form.value.valkey);
 		 this.addToListbackupbesointretait ({user:form.value.user,s:form.value.s,r:form.value.reponserobot});
 		this.removeItemFromListbesoin(form.value.valkey);
 }
-	} else {
+	} else if (this.type=="besoindujour") {
 		if (form.value.reponserobot=="") {
 		var reponsestandqrd="J'ai pas pu trouver une bonne solution pour ce besoin: \n\n"+form.value.s+"\n\nJe ferais mieux prochainement surtout pour les besoins d'achat de produits et services en te donnant un code d'achat ayant un retour sur achat d'un montant de 500f à 10000f!\n\nPour toutes questions, contactez le +229 62502434.";
     this.addToListmsgtosend({user:form.value.user,msg:reponsestandqrd});
@@ -134,7 +141,9 @@ this.removeItemFromListbesoin(form.value.valkey);
 		 this.addToListbackupbesointretait ({user:form.value.user,s:form.value.s,r:form.value.reponserobot});
 		this.removeItemFromListbesoin(form.value.valkey);
 }	
-	} 
+	} else {
+		
+	}
  }
  
  addToListmsgtosend(item: any) {
@@ -144,8 +153,13 @@ this.removeItemFromListbesoin(form.value.valkey);
   }
   
    addToListbackupbesointretait(item: any) {
+	   if (this.type.length > 15) {
+	 const itemsmsgtosend = this.af.list('/boteventinboxer/backupbesoinquestionpub/'+this.type);
+   itemsmsgtosend.push(item);		   
+	   } else {
 	 const itemsmsgtosend = this.af.list('/boteventinboxer/backupbesointraite/'+this.dateforbackup);
    itemsmsgtosend.push(item);
+	   }
   }
   
   removeItemFromListbesoin(key: string) {

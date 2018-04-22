@@ -27,17 +27,26 @@ export class MapsComponent implements OnInit {
 	  this.type = this.getUrlParameter('type');
 	  this.sens = this.getUrlParameter('sens');
 	  
+	  if (this.type.length>15) {this.date=this.type;this.type="backupbesoinquestionpub";}
+	  
 	console.log (this.date,this.sens,this.type);
 //	this.allbesoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, ref => ref.orderByChild('r').equalTo(null));
 
 
 		this.myVar=false;
+if (this.sens=="debut") {
 	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
 	query: {
         limitToFirst: 100
 	}
+      });
+} else {
+	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
+	query: {
+        limitToLast: 100
+	}
       });	
-	
+}
 console.log ("val from DB",this.besoins);
   }
   ngOnInit() {
