@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable'; 
 import * as aws from 'aws-sdk';
-var key="AKIAJ56GXIQ23IYHPMAQ";
-var secret="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";
+var key="hhh";
+var secret="jjj";
 aws.config.update({
   region: "us-east-2"
 });
