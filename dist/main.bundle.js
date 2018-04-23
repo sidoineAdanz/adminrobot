@@ -91,12 +91,16 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_common__ = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__demandelist_demandelist_component__ = __webpack_require__("./src/app/demandelist/demandelist.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__showprofil_showprofil_component__ = __webpack_require__("./src/app/showprofil/showprofil.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__questionpub_questionpub_component__ = __webpack_require__("./src/app/questionpub/questionpub.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -145,7 +149,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_15__maps_maps_component__["a" /* MapsComponent */],
             __WEBPACK_IMPORTED_MODULE_16__notifications_notifications_component__["a" /* NotificationsComponent */],
             __WEBPACK_IMPORTED_MODULE_17__upgrade_upgrade_component__["a" /* UpgradeComponent */],
-            __WEBPACK_IMPORTED_MODULE_22__demandelist_demandelist_component__["a" /* DemandelistComponent */]
+            __WEBPACK_IMPORTED_MODULE_22__demandelist_demandelist_component__["a" /* DemandelistComponent */],
+            __WEBPACK_IMPORTED_MODULE_23__showprofil_showprofil_component__["a" /* ShowprofilComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__questionpub_questionpub_component__["a" /* QuestionpubComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -182,6 +188,10 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maps_maps_component__ = __webpack_require__("./src/app/maps/maps.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__notifications_notifications_component__ = __webpack_require__("./src/app/notifications/notifications.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__upgrade_upgrade_component__ = __webpack_require__("./src/app/upgrade/upgrade.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__showprofil_showprofil_component__ = __webpack_require__("./src/app/showprofil/showprofil.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__questionpub_questionpub_component__ = __webpack_require__("./src/app/questionpub/questionpub.component.ts");
+
+
 
 
 
@@ -227,6 +237,14 @@ var AppRoutes = [
     {
         path: 'upgrade',
         component: __WEBPACK_IMPORTED_MODULE_7__upgrade_upgrade_component__["a" /* UpgradeComponent */]
+    },
+    {
+        path: 'showprofil',
+        component: __WEBPACK_IMPORTED_MODULE_8__showprofil_showprofil_component__["a" /* ShowprofilComponent */]
+    },
+    {
+        path: 'questionpub',
+        component: __WEBPACK_IMPORTED_MODULE_9__questionpub_questionpub_component__["a" /* QuestionpubComponent */]
     }
 ];
 //# sourceMappingURL=app.routing.js.map
@@ -481,7 +499,8 @@ var MapsComponent = (function () {
         this.date = this.getUrlParameter('date');
         this.type = this.getUrlParameter('type');
         this.sens = this.getUrlParameter('sens');
-        if (this.type.length > 15) {
+        if (this.type.indexOf("EVENTSUCCES") >= 0) {
+            this.type = this.type.replace("EVENTSUCCES", "");
             this.date = this.type;
             this.type = "backupbesoinquestionpub";
         }
@@ -591,6 +610,186 @@ NotificationsComponent = __decorate([
 ], NotificationsComponent);
 
 //# sourceMappingURL=notifications.component.js.map
+
+/***/ }),
+
+/***/ "./src/app/questionpub/questionpub.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/questionpub/questionpub.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "    <div class=\"container-fluid\">\n        <div class=\"row\"  *ngFor=\"let besoin of besoins | async\">\n            <div class=\"col-lg-4 col-md-5\">\n                <div class=\"card card-user\">\n                    <div class=\"image\">\n                 <!--       <img src=\"assets/img/background.jpg\" alt=\"...\"/> -->\n                    </div> \n                    <div class=\"content\">\n                        <div [hidden]=\"!myVar\" class=\"author\">\n                          <img class=\"avatar border-white\" src=\"{{string}}\" alt=\"...\"/> \n                          <h4 class=\"title\"><br />\n                             <a target=\"_blank\" href=\"/showprofil?user={{besoin.user}}\"><small>@Voir profil</small></a>\n                          </h4>\n                        </div>\n                        <p class=\"description text-center\">\n                          {{besoin.s}}\n                         \n                        </p>\n\t\t\t\t\t\t<em class=\"description text-center\">\n                      \n                        </em>\n                    </div>\n                    <hr>\n                    <div class=\"text-center\">\n                        <div class=\"row\">\n                            <div class=\"col-md-3 col-md-offset-1\">\n                                <h5>{{besoin.sipay}}<br /><small>Payable</small></h5>\n                            </div>\n                            <div class=\"col-md-4\">\n                                <h5>{{besoin.rpay}}<br /><small>Payer</small></h5>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <h5>{{besoin.v}}<br /><small>Ville</small></h5>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n             <!--   <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Team Members</h4>\n                    </div>\n                    <div class=\"content\">\n                        <ul class=\"list-unstyled team-members\">\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-0.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                DJ Khaled\n                                                <br />\n                                                <span class=\"text-muted\"><small>Offline</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-1.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Creative Tim\n                                                <br />\n                                                <span class=\"text-success\"><small>Available</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-3.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Flume\n                                                <br />\n                                                <span class=\"text-danger\"><small>Busy</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                </ul>\n                    </div>\n                </div>  -->\n            </div>\n            <div class=\"col-lg-8 col-md-7\">\n                <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Le client est ROI</h4>\n                    </div>\n                    <div class=\"content\">\n                        <form (ngSubmit)=\"onSubmit(reponses)\" #reponses=\"ngForm\">\n                        <!--    <div class=\"row\">\n                                <div class=\"col-md-5\">\n                                    <div class=\"form-group\">\n                                        <label>Company</label>\n                                        <input type=\"text\" class=\"form-control border-input\" disabled placeholder=\"Company\" value=\"Creative Code Inc.\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-3\">\n                                    <div class=\"form-group\">\n                                        <label>Username</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Username\" value=\"michael23\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"exampleInputEmail1\">Email address</label>\n                                        <input type=\"email\" class=\"form-control border-input\" placeholder=\"Email\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>First Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Company\" value=\"Chet\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>Last Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Last Name\" value=\"Faker\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>Address</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Home Address\" value=\"Melbourne, Australia\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>City</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"City\" value=\"Melbourne\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Country</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Country\" value=\"Australia\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Postal Code</label>\n                                        <input type=\"number\" class=\"form-control border-input\" placeholder=\"ZIP Code\">\n                                    </div>\n                                </div>\n                            </div> -->\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>REPONSE</label>\n                                        <textarea rows=\"5\" name=\"reponserobot\" class=\"form-control border-input\" placeholder=\"Message au cher ami du robot\"  id=\"reponserobot\" ngModel>\n\n\t\t\t\t\t\t\t\t\t\t</textarea>\n                                    </div>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"s\"  id=\"s\" [(ngModel)]=\"besoin.s\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"user\" id=\"user\"  [(ngModel)]=\"besoin.user\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"valkey\" id=\"valkey\"  [(ngModel)]=\"besoin.$key\" ngModel>\n                                </div>\n                            </div>\n                            <div class=\"text-center\">\n                                <button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\">VALIDER</button>\n\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\" style=\"background-color: red;\">SUPPRIMER</button>\n                            </div>\n                            <div class=\"clearfix\"></div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n\n\n        </div>\n    </div>\n"
+
+/***/ }),
+
+/***/ "./src/app/questionpub/questionpub.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionpubComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database_deprecated__ = __webpack_require__("./node_modules/angularfire2/database-deprecated/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// import entire SDK
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
+var QuestionpubComponent = (function () {
+    function QuestionpubComponent(af) {
+        this.af = af;
+        this.date = '';
+        this.dateforbackup = '';
+        this.type = '';
+        this.sens = '';
+        this.dejapasse = "";
+        this.img = 'http://seg.solutions/imgbot/logookkk.png';
+        this.nomprenom = '-';
+        this.msgVal = '';
+        this.myVar = true;
+        this.users = af.list('/coursSupinfo/coursSupinfo', {
+            query: {
+                limitToLast: 5
+            }
+        });
+        this.date = this.getUrlParameter('date');
+        this.dateforbackup = this.getUrlParameter('date');
+        this.type = this.getUrlParameter('type');
+        this.sens = this.getUrlParameter('sens');
+        console.log(this.date, this.sens, this.type);
+        //	this.allbesoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, ref => ref.orderByChild('r').equalTo(null));
+        if (this.type == "achatspecial") {
+            this.date = "";
+        }
+        if (this.type.indexOf("EVENTSUCCES") >= 0) {
+            this.type = this.type.replace("EVENTSUCCES", "");
+            this.date = this.type;
+            this.type = "questionpub";
+        }
+        if (this.sens == "debut") {
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToFirst: 1
+                }
+            });
+        }
+        else if (this.sens == "fin") {
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToLast: 1
+                }
+            });
+        }
+        else if (this.sens == "5last") {
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToLast: 5
+                }
+            });
+        }
+        else if (this.sens == "5first") {
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToFirst: 5
+                }
+            });
+        }
+        else if (this.sens == "backup") {
+            this.myVar = false;
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToFirst: 5
+                }
+            });
+        }
+        else {
+            this.myVar = false;
+            this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
+                query: {
+                    limitToFirst: 5
+                }
+            });
+        }
+        /* this.besoins.map(song => {
+            song [0].img="ffff";
+          console.log ("val from song",song);
+          return song;
+        })
+        .subscribe(songs => {
+          songs.forEach(song => this.forimguser(song.user))
+            console.log ("val from this.img",this.img);
+        //return songs;
+        }); */
+        console.log("val from DB", this.besoins);
+    }
+    QuestionpubComponent.prototype.ngOnInit = function () {
+    };
+    QuestionpubComponent.prototype.onSubmit = function (form) {
+        //   console.log(form.value);
+        var itemsmsgtosend = this.af.list('/boteventinboxer/msgtosend');
+        if (form.value.reponserobot == "") {
+            var reponsestandqrd = "Je n'ai eu aucune réponse par rapport à ta question: \n\n" + form.value.s;
+            this.addToListmsgtosend({ user: form.value.user, msg: reponsestandqrd });
+            this.removeItemFromListbesoin(form.value.valkey);
+        }
+        else {
+            this.addToListmsgtosend({ user: form.value.user, msg: "Concernant:" + form.value.s + "\n\n Voici la réponse:" + form.value.reponserobot });
+            var setreponses = this.af.object('/boteventinboxer/' + this.type + '/' + this.date + '/' + form.value.valkey);
+            // setreponses.update({r:form.value.reponserobot}).then(_ => console.log('update!'));
+            this.addToListbackupbesointretait({ user: form.value.user, s: form.value.s, r: form.value.reponserobot });
+            this.removeItemFromListbesoin(form.value.valkey);
+        }
+    };
+    QuestionpubComponent.prototype.addToListmsgtosend = function (item) {
+        console.log(item);
+        var itemsmsgtosend = this.af.list('/boteventinboxer/msgtosend');
+        itemsmsgtosend.push(item);
+    };
+    QuestionpubComponent.prototype.addToListbackupbesointretait = function (item) {
+        var itemsmsgtosend = this.af.list('/boteventinboxer/backupbesoinquestionpub/' + this.type);
+        itemsmsgtosend.push(item);
+    };
+    QuestionpubComponent.prototype.removeItemFromListbesoin = function (key) {
+        this.besoins.remove(key).then(function (_) { return console.log('item deleted!'); });
+    };
+    QuestionpubComponent.prototype.updateValuebesoin = function (data) {
+        //  this.value.update(data).then(_ => console.log('update!'));
+    };
+    QuestionpubComponent.prototype.getUrlParameter = function (sParam) {
+        return decodeURIComponent(window.location.search.substring(1)).split('&')
+            .map(function (v) { return v.split("="); })
+            .filter(function (v) { return (v[0] === sParam) ? true : false; })
+            .reduce(function (prev, curv, index, array) { return curv[1]; }, undefined);
+    };
+    return QuestionpubComponent;
+}());
+QuestionpubComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-questionpub',
+        template: __webpack_require__("./src/app/questionpub/questionpub.component.html"),
+        styles: [__webpack_require__("./src/app/questionpub/questionpub.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database_deprecated__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database_deprecated__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
+], QuestionpubComponent);
+
+var _a;
+//# sourceMappingURL=questionpub.component.js.map
 
 /***/ }),
 
@@ -903,6 +1102,108 @@ NavbarModule = __decorate([
 
 /***/ }),
 
+/***/ "./src/app/showprofil/showprofil.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/showprofil/showprofil.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p  *ngIf=\"userdata\">\n  showprofil works!\n  \n  {{userdata.id}}\n</p>\n<p  *ngIf=\"user\">\n  showprofil works!\n  \n  {{user}}\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/showprofil/showprofil.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowprofilComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_sdk__ = __webpack_require__("./node_modules/aws-sdk/lib/browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_sdk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_aws_sdk__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var key = "AKIAJ56GXIQ23IYHPMAQ";
+var secret = "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";
+__WEBPACK_IMPORTED_MODULE_1_aws_sdk__["config"].update({
+    region: "us-east-2"
+});
+var s3 = new __WEBPACK_IMPORTED_MODULE_1_aws_sdk__["S3"]({
+    accessKeyId: key,
+    secretAccessKey: secret
+});
+var dynamodb = new __WEBPACK_IMPORTED_MODULE_1_aws_sdk__["DynamoDB"]({
+    accessKeyId: key,
+    secretAccessKey: secret,
+    apiVersion: '2012-08-10'
+});
+var docClient = new __WEBPACK_IMPORTED_MODULE_1_aws_sdk__["DynamoDB"].DocumentClient({
+    accessKeyId: key,
+    secretAccessKey: secret
+});
+var ShowprofilComponent = (function () {
+    function ShowprofilComponent(ref) {
+        this.ref = ref;
+        this.user = '';
+        this.userdata = '';
+        this.user = this.getUrlParameter('user');
+        var params = { TableName: "sucusers", Key: { "k": this.user } };
+        docClient.get(params, function (err, data) {
+            var _this = this;
+            if (err || data.Item == null) {
+                console.error(err);
+                return null;
+            }
+            else {
+                console.log("val data", data);
+                this.userdata = data.Item.d.id;
+                this.user = data.Item.d.id;
+                this.userdata.subscribe(function () {
+                    console.log(_this.userdata);
+                    _this.cd.markForCheck();
+                });
+                console.log(this.userdata);
+                ref.detectChanges();
+                console.log(this.userdata);
+            }
+        });
+    }
+    ShowprofilComponent.prototype.ngOnInit = function () {
+    };
+    ShowprofilComponent.prototype.getUrlParameter = function (sParam) {
+        return decodeURIComponent(window.location.search.substring(1)).split('&')
+            .map(function (v) { return v.split("="); })
+            .filter(function (v) { return (v[0] === sParam) ? true : false; })
+            .reduce(function (prev, curv, index, array) { return curv[1]; }, undefined);
+    };
+    return ShowprofilComponent;
+}());
+ShowprofilComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-showprofil',
+        template: __webpack_require__("./src/app/showprofil/showprofil.component.html"),
+        styles: [__webpack_require__("./src/app/showprofil/showprofil.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"]) === "function" && _a || Object])
+], ShowprofilComponent);
+
+var _a;
+//# sourceMappingURL=showprofil.component.js.map
+
+/***/ }),
+
 /***/ "./src/app/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
@@ -1132,7 +1433,7 @@ UpgradeComponent = __decorate([
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "    <div class=\"container-fluid\">\n        <div class=\"row\" *ngFor=\"let besoin of besoins | async\">\n            <div class=\"col-lg-4 col-md-5\">\n                <div class=\"card card-user\">\n                    <div class=\"image\">\n                 <!--       <img src=\"assets/img/background.jpg\" alt=\"...\"/> -->\n                    </div> \n                    <div class=\"content\">\n                        <div [hidden]=\"!myVar\" class=\"author\">\n                          <img class=\"avatar border-white\" src=\"{{besoin.uprofil}}\" alt=\"...\"/> \n                          <h4 class=\"title\">{{besoin.uinfo.uinfo}}<br />\n                             <a href=\"#\"><small>@{{besoin.uinfo.status}}</small></a>\n                          </h4>\n                        </div>\n                        <p class=\"description text-center\">\n                          \n                            {{besoin.s}}\n                        </p>\n\t\t\t\t\t\t<em class=\"description text-center\">\n                      \n                            {{besoin.r}}\n                        </em>\n                    </div>\n                    <hr>\n                    <div class=\"text-center\">\n                        <div class=\"row\">\n                            <div class=\"col-md-3 col-md-offset-1\">\n                                <h5>{{besoin.sipay}}<br /><small>Payable</small></h5>\n                            </div>\n                            <div class=\"col-md-4\">\n                                <h5>{{besoin.rpay}}<br /><small>Payer</small></h5>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <h5>{{besoin.uinfo.v}}<br /><small>Ville</small></h5>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n             <!--   <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Team Members</h4>\n                    </div>\n                    <div class=\"content\">\n                        <ul class=\"list-unstyled team-members\">\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-0.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                DJ Khaled\n                                                <br />\n                                                <span class=\"text-muted\"><small>Offline</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-1.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Creative Tim\n                                                <br />\n                                                <span class=\"text-success\"><small>Available</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-3.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Flume\n                                                <br />\n                                                <span class=\"text-danger\"><small>Busy</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                </ul>\n                    </div>\n                </div>  -->\n            </div>\n            <div class=\"col-lg-8 col-md-7\">\n                <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Le client est ROI</h4>\n                    </div>\n                    <div class=\"content\">\n                        <form (ngSubmit)=\"onSubmit(reponses)\" #reponses=\"ngForm\">\n                        <!--    <div class=\"row\">\n                                <div class=\"col-md-5\">\n                                    <div class=\"form-group\">\n                                        <label>Company</label>\n                                        <input type=\"text\" class=\"form-control border-input\" disabled placeholder=\"Company\" value=\"Creative Code Inc.\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-3\">\n                                    <div class=\"form-group\">\n                                        <label>Username</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Username\" value=\"michael23\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"exampleInputEmail1\">Email address</label>\n                                        <input type=\"email\" class=\"form-control border-input\" placeholder=\"Email\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>First Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Company\" value=\"Chet\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>Last Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Last Name\" value=\"Faker\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>Address</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Home Address\" value=\"Melbourne, Australia\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>City</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"City\" value=\"Melbourne\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Country</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Country\" value=\"Australia\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Postal Code</label>\n                                        <input type=\"number\" class=\"form-control border-input\" placeholder=\"ZIP Code\">\n                                    </div>\n                                </div>\n                            </div> -->\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>REPONSE</label>\n                                        <textarea rows=\"5\" name=\"reponserobot\" class=\"form-control border-input\" placeholder=\"Message au cher ami du robot\"  id=\"reponserobot\" ngModel>\n\n\t\t\t\t\t\t\t\t\t\t</textarea>\n                                    </div>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"s\"  id=\"s\" [(ngModel)]=\"besoin.s\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"user\" id=\"user\"  [(ngModel)]=\"besoin.user\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"valkey\" id=\"valkey\"  [(ngModel)]=\"besoin.$key\" ngModel>\n                                </div>\n                            </div>\n                            <div class=\"text-center\">\n                                <button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\">VALIDER</button>\n                            </div>\n                            <div class=\"clearfix\"></div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n\n\n        </div>\n    </div>\n"
+module.exports = "    <div class=\"container-fluid\">\n        <div class=\"row\"  *ngFor=\"let besoin of besoins | async\">\n            <div class=\"col-lg-4 col-md-5\">\n                <div class=\"card card-user\">\n                    <div class=\"image\">\n                 <!--       <img src=\"assets/img/background.jpg\" alt=\"...\"/> -->\n                    </div> \n                    <div class=\"content\">\n                        <div [hidden]=\"!myVar\" class=\"author\">\n                          <img class=\"avatar border-white\" src=\"{{besoin.uprofil}}\" alt=\"...\"/> \n                          <h4 class=\"title\">{{besoin.uinfo.status}}<br />\n                             <a target=\"_blank\" href=\"/showprofil?user={{besoin.user}}\"><small>@Voir profil</small></a>\n                          </h4>\n                        </div>\n                        <p class=\"description text-center\">\n                          {{besoin.s}}\n                         \n                        </p>\n\t\t\t\t\t\t<em class=\"description text-center\">\n                      \n                        </em>\n                    </div>\n                    <hr>\n                    <div class=\"text-center\">\n                        <div class=\"row\">\n                            <div class=\"col-md-3 col-md-offset-1\">\n                                <h5>{{besoin.sipay}}<br /><small>Payable</small></h5>\n                            </div>\n                            <div class=\"col-md-4\">\n                                <h5>{{besoin.rpay}}<br /><small>Payer</small></h5>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <h5>{{besoin.uinfo.v}}<br /><small>Ville</small></h5>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n             <!--   <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Team Members</h4>\n                    </div>\n                    <div class=\"content\">\n                        <ul class=\"list-unstyled team-members\">\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-0.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                DJ Khaled\n                                                <br />\n                                                <span class=\"text-muted\"><small>Offline</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-1.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Creative Tim\n                                                <br />\n                                                <span class=\"text-success\"><small>Available</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    <li>\n                                        <div class=\"row\">\n                                            <div class=\"col-xs-3\">\n                                                <div class=\"avatar\">\n                                                    <img src=\"assets/img/faces/face-3.jpg\" alt=\"Circle Image\" class=\"img-circle img-no-padding img-responsive\">\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xs-6\">\n                                                Flume\n                                                <br />\n                                                <span class=\"text-danger\"><small>Busy</small></span>\n                                            </div>\n\n                                            <div class=\"col-xs-3 text-right\">\n                                                <button class=\"btn btn-sm btn-success btn-icon\"><i class=\"fa fa-envelope\"></i></button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                </ul>\n                    </div>\n                </div>  -->\n            </div>\n            <div class=\"col-lg-8 col-md-7\">\n                <div class=\"card\">\n                    <div class=\"header\">\n                        <h4 class=\"title\">Le client est ROI</h4>\n                    </div>\n                    <div class=\"content\">\n                        <form (ngSubmit)=\"onSubmit(reponses)\" #reponses=\"ngForm\">\n                        <!--    <div class=\"row\">\n                                <div class=\"col-md-5\">\n                                    <div class=\"form-group\">\n                                        <label>Company</label>\n                                        <input type=\"text\" class=\"form-control border-input\" disabled placeholder=\"Company\" value=\"Creative Code Inc.\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-3\">\n                                    <div class=\"form-group\">\n                                        <label>Username</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Username\" value=\"michael23\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"exampleInputEmail1\">Email address</label>\n                                        <input type=\"email\" class=\"form-control border-input\" placeholder=\"Email\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>First Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Company\" value=\"Chet\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-6\">\n                                    <div class=\"form-group\">\n                                        <label>Last Name</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Last Name\" value=\"Faker\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>Address</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Home Address\" value=\"Melbourne, Australia\">\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>City</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"City\" value=\"Melbourne\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Country</label>\n                                        <input type=\"text\" class=\"form-control border-input\" placeholder=\"Country\" value=\"Australia\">\n                                    </div>\n                                </div>\n                                <div class=\"col-md-4\">\n                                    <div class=\"form-group\">\n                                        <label>Postal Code</label>\n                                        <input type=\"number\" class=\"form-control border-input\" placeholder=\"ZIP Code\">\n                                    </div>\n                                </div>\n                            </div> -->\n\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"form-group\">\n                                        <label>REPONSE</label>\n                                        <textarea rows=\"5\" name=\"reponserobot\" class=\"form-control border-input\" placeholder=\"Message au cher ami du robot\"  id=\"reponserobot\" ngModel>\n\n\t\t\t\t\t\t\t\t\t\t</textarea>\n                                    </div>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"s\"  id=\"s\" [(ngModel)]=\"besoin.s\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"user\" id=\"user\"  [(ngModel)]=\"besoin.user\" ngModel>\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"valkey\" id=\"valkey\"  [(ngModel)]=\"besoin.$key\" ngModel>\n                                </div>\n                            </div>\n                            <div class=\"text-center\">\n                                <button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\">VALIDER</button>\n\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\" style=\"background-color: red;\">SUPPRIMER</button>\n                            </div>\n                            <div class=\"clearfix\"></div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n\n\n        </div>\n    </div>\n"
 
 /***/ }),
 
@@ -1143,6 +1444,8 @@ module.exports = "    <div class=\"container-fluid\">\n        <div class=\"row\
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database_deprecated__ = __webpack_require__("./node_modules/angularfire2/database-deprecated/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1155,6 +1458,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+// import entire SDK
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 var UserComponent = (function () {
     function UserComponent(af) {
@@ -1163,11 +1468,14 @@ var UserComponent = (function () {
         this.dateforbackup = '';
         this.type = '';
         this.sens = '';
+        this.dejapasse = "";
+        this.img = 'http://seg.solutions/imgbot/logookkk.png';
+        this.nomprenom = '-';
         this.msgVal = '';
         this.myVar = true;
         this.users = af.list('/coursSupinfo/coursSupinfo', {
             query: {
-                limitToLast: 50
+                limitToLast: 5
             }
         });
         this.date = this.getUrlParameter('date');
@@ -1193,17 +1501,17 @@ var UserComponent = (function () {
                 }
             });
         }
-        else if (this.sens == "100last") {
+        else if (this.sens == "5last") {
             this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
                 query: {
-                    limitToLast: 100
+                    limitToLast: 5
                 }
             });
         }
-        else if (this.sens == "100first") {
+        else if (this.sens == "5first") {
             this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
                 query: {
-                    limitToFirst: 100
+                    limitToFirst: 5
                 }
             });
         }
@@ -1211,7 +1519,7 @@ var UserComponent = (function () {
             this.myVar = false;
             this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
                 query: {
-                    limitToFirst: 100
+                    limitToFirst: 5
                 }
             });
         }
@@ -1219,10 +1527,20 @@ var UserComponent = (function () {
             this.myVar = false;
             this.besoins = af.list('/boteventinboxer/' + this.type + '/' + this.date, {
                 query: {
-                    limitToFirst: 100
+                    limitToFirst: 5
                 }
             });
         }
+        /* this.besoins.map(song => {
+            song [0].img="ffff";
+          console.log ("val from song",song);
+          return song;
+        })
+        .subscribe(songs => {
+          songs.forEach(song => this.forimguser(song.user))
+            console.log ("val from this.img",this.img);
+        //return songs;
+        }); */
         console.log("val from DB", this.besoins);
     }
     UserComponent.prototype.ngOnInit = function () {
@@ -1285,14 +1603,8 @@ var UserComponent = (function () {
         itemsmsgtosend.push(item);
     };
     UserComponent.prototype.addToListbackupbesointretait = function (item) {
-        if (this.type.length > 15) {
-            var itemsmsgtosend = this.af.list('/boteventinboxer/backupbesoinquestionpub/' + this.type);
-            itemsmsgtosend.push(item);
-        }
-        else {
-            var itemsmsgtosend = this.af.list('/boteventinboxer/backupbesointraite/' + this.dateforbackup);
-            itemsmsgtosend.push(item);
-        }
+        var itemsmsgtosend = this.af.list('/boteventinboxer/backupbesointraite/' + this.dateforbackup);
+        itemsmsgtosend.push(item);
     };
     UserComponent.prototype.removeItemFromListbesoin = function (key) {
         this.besoins.remove(key).then(function (_) { return console.log('item deleted!'); });
@@ -1368,6 +1680,13 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 /***/ }),
 
 /***/ 0:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./src/main.ts");
@@ -1375,5 +1694,5 @@ module.exports = __webpack_require__("./src/main.ts");
 
 /***/ })
 
-},[0]);
+},[1]);
 //# sourceMappingURL=main.bundle.js.map

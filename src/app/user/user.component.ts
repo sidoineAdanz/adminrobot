@@ -6,6 +6,9 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable'; 
 import { NgForm } from '@angular/forms';
+import 'rxjs/add/operator/map';
+// import entire SDK
+
 
 enableProdMode();
 @Component({
@@ -32,6 +35,9 @@ export class UserComponent implements OnInit{
   dateforbackup: string = '';
   type: string = '';
   sens: string = '';
+  dejapasse:string="";
+   img: string = 'http://seg.solutions/imgbot/logookkk.png';
+  nomprenom: string = '-';
   besoins: FirebaseListObservable<any[]>;
   allbesoins: FirebaseListObservable<any[]>;
   msgVal: string = '';
@@ -39,7 +45,7 @@ export class UserComponent implements OnInit{
   constructor( public af: AngularFireDatabase) {
     this.users = af.list('/coursSupinfo/coursSupinfo', {
       query: {
-        limitToLast: 50
+        limitToLast: 5
       }
     });
 	  this.date = this.getUrlParameter('date');
@@ -62,34 +68,45 @@ if (this.type=="achatspecial") {this.date = ""; }
         limitToLast: 1
 	}
       });	
-	} else if (this.sens=="100last") {
+	} else if (this.sens=="5last") {
 	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
 	query: {
-        limitToLast: 100
+        limitToLast: 5
 	}
       });	
-	} else if (this.sens=="100first") {
+	} else if (this.sens=="5first") {
 	
 	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
 	query: {
-        limitToFirst: 100
+        limitToFirst: 5
 	}
       });	
 	} else if (this.sens=="backup") {
 		this.myVar=false;
 	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
 	query: {
-        limitToFirst: 100
+        limitToFirst: 5
 	}
       });	
 	} else {
 		this.myVar=false;
 	this.besoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, {
 	query: {
-        limitToFirst: 100
+        limitToFirst: 5
 	}
       });		
 	}
+
+/* this.besoins.map(song => {
+	song [0].img="ffff";
+  console.log ("val from song",song);
+  return song;
+})
+.subscribe(songs => {
+  songs.forEach(song => this.forimguser(song.user))
+    console.log ("val from this.img",this.img);
+//return songs;
+}); */
 console.log ("val from DB",this.besoins);
   }
   ngOnInit() {
@@ -145,6 +162,7 @@ this.removeItemFromListbesoin(form.value.valkey);
 		
 	}
  }
+
  
  addToListmsgtosend(item: any) {
 	 console.log (item);
@@ -153,13 +171,10 @@ this.removeItemFromListbesoin(form.value.valkey);
   }
   
    addToListbackupbesointretait(item: any) {
-	   if (this.type.length > 15) {
-	 const itemsmsgtosend = this.af.list('/boteventinboxer/backupbesoinquestionpub/'+this.type);
-   itemsmsgtosend.push(item);		   
-	   } else {
+	
 	 const itemsmsgtosend = this.af.list('/boteventinboxer/backupbesointraite/'+this.dateforbackup);
    itemsmsgtosend.push(item);
-	   }
+
   }
   
   removeItemFromListbesoin(key: string) {

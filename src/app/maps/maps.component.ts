@@ -27,7 +27,7 @@ export class MapsComponent implements OnInit {
 	  this.type = this.getUrlParameter('type');
 	  this.sens = this.getUrlParameter('sens');
 	  
-	  if (this.type.length>15) {this.date=this.type;this.type="backupbesoinquestionpub";}
+	    if (this.type.indexOf("EVENTSUCCES") >= 0) {this.type=this.type.replace("EVENTSUCCES","");this.date=this.type;this.type="backupbesoinquestionpub";}
 	  
 	console.log (this.date,this.sens,this.type);
 //	this.allbesoins = af.list('/boteventinboxer/'+this.type+'/'+this.date, ref => ref.orderByChild('r').equalTo(null));

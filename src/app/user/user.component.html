@@ -1,5 +1,5 @@
     <div class="container-fluid">
-        <div class="row" *ngFor="let besoin of besoins | async">
+        <div class="row"  *ngFor="let besoin of besoins | async">
             <div class="col-lg-4 col-md-5">
                 <div class="card card-user">
                     <div class="image">
@@ -8,17 +8,16 @@
                     <div class="content">
                         <div [hidden]="!myVar" class="author">
                           <img class="avatar border-white" src="{{besoin.uprofil}}" alt="..."/> 
-                          <h4 class="title">{{besoin.uinfo.uinfo}}<br />
-                             <a href="#"><small>@{{besoin.uinfo.status}}</small></a>
+                          <h4 class="title">{{besoin.uinfo.status}}<br />
+                             <a target="_blank" href="/showprofil?user={{besoin.user}}"><small>@Voir profil</small></a>
                           </h4>
                         </div>
                         <p class="description text-center">
-                          
-                            {{besoin.s}}
+                          {{besoin.s}}
+                         
                         </p>
 						<em class="description text-center">
                       
-                            {{besoin.r}}
                         </em>
                     </div>
                     <hr>
@@ -188,6 +187,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-info btn-fill btn-wd">VALIDER</button>
+								<button type="submit" class="btn btn-info btn-fill btn-wd" style="background-color: red;">SUPPRIMER</button>
                             </div>
                             <div class="clearfix"></div>
                         </form>

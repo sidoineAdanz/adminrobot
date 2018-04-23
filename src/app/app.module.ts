@@ -28,7 +28,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
  import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 
-import { DemandelistComponent } from './demandelist/demandelist.component'; 
+import { DemandelistComponent } from './demandelist/demandelist.component';
+import { ShowprofilComponent } from './showprofil/showprofil.component';
+import { QuestionpubComponent } from './questionpub/questionpub.component'; 
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAbYjhl5cCMZotC0z5ckk1Ryzb_jhn7Hg4",
@@ -50,7 +52,9 @@ export const firebaseConfig = {
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    DemandelistComponent
+    DemandelistComponent,
+    ShowprofilComponent,
+    QuestionpubComponent
   ],
   imports: [
     BrowserModule,
